@@ -1,8 +1,7 @@
 extends CharacterBody3D
 
-const SPEED = 20.0
+const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-
 @onready var camera = $Camera3D;
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -11,10 +10,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE;
 	
-	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		if event is InputEventMouseMotion:
-			camera.rotate_x(-event.relative.y * 0.01);
-			self.rotate_y(-event.relative.x * 0.01);
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and event is InputEventMouseMotion:
+		self.rotate_y(-event.relative.x * 0.01);
 	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -37,3 +34,4 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+ 

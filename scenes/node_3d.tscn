@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ch0osh70bybrh"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.991216, 0.130628, 0.0206895, 0, -0.156434, 0.987688, 0.132256, 0.979012, 0.15506, 0, 0, 0)
+light_color = Color(0.641519, 0.732419, 0.963333, 1)
+light_energy = 2.505
+light_indirect_energy = 1.61
+light_volumetric_fog_energy = 0.195
+light_angular_distance = 42.0
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_fade_start = 0.752
+directional_shadow_max_distance = 1904.6
+
+[node name="player_cam" type="Camera3D" parent="."]
+transform = Transform3D(0.821149, -0.48452, 0.301587, 0, 0.528438, 0.848972, -0.570714, -0.697132, 0.433927, -0.839068, 0.0459095, 2.34991)
+current = true
+fov = 90.0
+near = 0.045
+far = 8.46
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.994881, 0.101056, 0, -0.101056, -0.994881, 0, 1.00587, 0)
+light_energy = 0.695
+light_angular_distance = 42.0
