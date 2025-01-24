@@ -63,7 +63,7 @@ func _input(event: InputEvent) -> void:
 		if event.is_pressed() && not event.is_echo():
 			if focused_wood_node != null:
 				var d1 = player.global_transform.origin
-				var d2 = focused_wood_node.global_transform.origin
+				var d2 = focused_wood_node.get_child(0).global_transform.origin
 				var d = d1.distance_to(d2)
 				if d < PLAYER_WOOD_MIN_DIST:
 					wood_in_inventory += 1;
