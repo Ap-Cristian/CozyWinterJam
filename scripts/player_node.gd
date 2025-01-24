@@ -30,7 +30,6 @@ func _process(delta: float) -> void:
 		var collider_path = intersection.collider.get_path();
 		var full_node_path = collider_path.get_concatenated_names();
 
-		print(full_node_path);
 		if full_node_path.begins_with("root/Main/Ground"):
 			intersection_pos = intersection.position;
 			break ;

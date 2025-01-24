@@ -34,7 +34,6 @@ func mouse_colliding_with_wood(mouse_pos: Vector2):
 			var d1 = player.global_transform.origin
 			var d2 = node.get_child(0).global_transform.origin
 			var d = d1.distance_to(d2)
-			# print(full_node_path, d);
 			if d < PLAYER_WOOD_MIN_DIST:
 				hit_node = node;
 			break ;
