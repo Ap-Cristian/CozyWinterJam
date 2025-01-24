@@ -3,7 +3,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cnimyjw4ihuqd" path="res://assets/ground.obj" id="1_6boc0"]
 [ext_resource type="Script" path="res://scripts/debug_camera-input.gd" id="2_7ty1g"]
 [ext_resource type="Script" path="res://scripts/player-input.gd" id="3_gucpw"]
-[ext_resource type="Script" path="res://scenes/player_node.gd" id="3_v2enm"]
+[ext_resource type="Script" path="res://scripts/player_node.gd" id="3_v2enm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_civ5m"]
 sky_top_color = Color(0.45517, 0.527521, 0.628218, 1)
