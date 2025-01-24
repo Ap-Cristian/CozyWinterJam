@@ -2,7 +2,7 @@ extends Node3D
 
 var tree_prefab = preload("res://prefabs/tree.tscn");
 var nodeHelper = preload("res://scripts/helpers/node_helpers.gd").new();
-const TREE_DENSITY = 1000;
+const TREE_DENSITY = 100000;
 
 @onready var ground = get_parent().get_node("Ground/Ground");
 @onready var safeZone = get_parent().get_node("SafeZone");

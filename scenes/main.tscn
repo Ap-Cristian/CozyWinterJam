@@ -59,13 +59,13 @@ albedo_color = Color(0.694643, 0, 0.136462, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_nxch8"]
 material = SubResource("StandardMaterial3D_fsa2x")
-top_radius = 10.0
-bottom_radius = 10.0
+top_radius = 20.0
+bottom_radius = 20.0
 height = 6.8
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2f3cq"]
 height = 6.8
-radius = 10.0
+radius = 20.0
 
 [node name="Main" type="Node"]
 
