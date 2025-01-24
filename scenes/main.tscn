@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://brrhme3x06dbp"]
+[gd_scene load_steps=17 format=3 uid="uid://brrhme3x06dbp"]
 
 [ext_resource type="Script" path="res://scripts/debug_camera-input.gd" id="2_7ty1g"]
 [ext_resource type="Script" path="res://scripts/player-input.gd" id="3_gucpw"]
 [ext_resource type="Script" path="res://scripts/player_node.gd" id="3_v2enm"]
 [ext_resource type="Script" path="res://scripts/wood_manager.gd" id="5_jdd0r"]
+[ext_resource type="Script" path="res://scripts/ui.gd" id="5_lyhul"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_civ5m"]
 sky_top_color = Color(0.45517, 0.527521, 0.628218, 1)
@@ -139,3 +140,22 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("CylinderShape3D_2f3cq")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("5_lyhul")
+
+[node name="WoodPieces" type="Label" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -48.0
+offset_right = -30.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "
+"
+horizontal_alignment = 2

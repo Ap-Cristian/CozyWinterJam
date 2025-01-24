@@ -2,12 +2,15 @@ extends Node3D
 
 @onready var camera = $"../Player_Node/Camera3D"
 @onready var player = $"../Player_Node/Player";
+@onready var ui = $"../UI"
 
 const PLAYER_WOOD_MIN_DIST = 5;
 
 var wood_scene = preload("res://scenes/wood.tscn");
 var focused_wood_node = null;
 var wood_in_inventory = 0;
+
+signal wood_updated
 
 func _input(event: InputEvent) -> void:
 
@@ -48,6 +51,7 @@ func _input(event: InputEvent) -> void:
 				var d = d1.distance_to(d2)
 				if d < PLAYER_WOOD_MIN_DIST:
 					wood_in_inventory += 1;
+					wood_updated.emit(wood_in_inventory);
 					focused_wood_node.queue_free();
 
 
@@ -61,6 +65,8 @@ func spawn_wood(x: float, z: float):
 func _ready() -> void:
 	var ground_node = get_parent().get_node("Ground/Ground");
 	var ground_size = ground_node.get_aabb();
+
+	wood_updated.connect(ui.update_wood_pieces);
 	
 	var x_range = [ground_size.position.x, ground_size.end.x];
 	var z_range = [ground_size.position.z, ground_size.end.z];
