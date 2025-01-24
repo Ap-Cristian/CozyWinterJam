@@ -1,11 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://brrhme3x06dbp"]
+[gd_scene load_steps=23 format=3 uid="uid://brrhme3x06dbp"]
 
 [ext_resource type="Script" path="res://scripts/debug_camera-input.gd" id="2_7ty1g"]
 [ext_resource type="Script" path="res://scripts/player-input.gd" id="3_gucpw"]
 [ext_resource type="Script" path="res://scripts/player_node.gd" id="3_v2enm"]
+[ext_resource type="Script" path="res://scripts/fire.gd" id="4_cjcqn"]
 [ext_resource type="Script" path="res://scripts/wood_manager.gd" id="5_jdd0r"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="5_lyhul"]
 [ext_resource type="Script" path="res://scripts/tree_manager.gd" id="6_gy3cr"]
+[ext_resource type="Texture2D" uid="uid://bb3uhma5asl6d" path="res://assets/healthbarUnder.png" id="8_k6igo"]
+[ext_resource type="Texture2D" uid="uid://kw66ppv7l26l" path="res://assets/healthbarProgress.png" id="9_6n4hx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_civ5m"]
 sky_top_color = Color(0.45517, 0.527521, 0.628218, 1)
@@ -66,6 +69,12 @@ height = 6.8
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2f3cq"]
 height = 6.8
 radius = 20.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_llp2x"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ki5hu"]
+size = Vector3(2, 2, 2)
 
 [node name="Main" type="Node"]
 
@@ -139,6 +148,18 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SafeZone"]
 shape = SubResource("CylinderShape3D_2f3cq")
 
+[node name="Fire" type="StaticBody3D" parent="."]
+script = ExtResource("4_cjcqn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fire"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01604, 0)
+shape = SubResource("BoxShape3D_llp2x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Fire"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04169, 0)
+mesh = SubResource("BoxMesh_ki5hu")
+skeleton = NodePath("")
+
 [node name="WoodManager" type="Node3D" parent="."]
 script = ExtResource("5_jdd0r")
 
@@ -147,6 +168,16 @@ script = ExtResource("6_gy3cr")
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("5_lyhul")
+
+[node name="FireStrength" type="TextureProgressBar" parent="UI"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 74.0
+offset_bottom = 20.0
+max_value = 1.0
+step = 0.01
+texture_under = ExtResource("8_k6igo")
+texture_progress = ExtResource("9_6n4hx")
 
 [node name="WoodPieces" type="Label" parent="UI"]
 anchors_preset = 3
@@ -161,3 +192,16 @@ offset_bottom = -25.0
 grow_horizontal = 0
 grow_vertical = 0
 horizontal_alignment = 2
+
+[node name="FireInteractableNotice" type="Label" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2

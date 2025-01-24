@@ -12,6 +12,15 @@ var wood_in_inventory = 0;
 
 signal wood_updated
 
+func get_wood_in_inventory():
+	return wood_in_inventory;
+
+func wood_deposit_all():
+	var ret = wood_in_inventory;
+	wood_in_inventory = 0;
+	wood_updated.emit(wood_in_inventory);
+	return ret;
+
 func mouse_colliding_with_wood(mouse_pos: Vector2):
 	var space_state = get_world_3d().direct_space_state
 	var rayOrigin = camera.project_ray_origin(mouse_pos);
