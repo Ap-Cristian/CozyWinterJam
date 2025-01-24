@@ -24,9 +24,8 @@ func get_rand_coords_on_ground_outside_zone(ground: Node, zone_origin: Array, zo
 
 	var x = randf_range(x_range[0], x_range[1]);
 	var z = randf_range(z_range[0], z_range[1]);
-	
 	var zone_origin_to_point_distance = get_distance_between_points(zone_origin, [x,z])
-	#print(zone_radius)	
+
 	while zone_origin_to_point_distance < zone_radius:
 		x = randf_range(x_range[0], x_range[1]);
 		z = randf_range(z_range[0], z_range[1]);

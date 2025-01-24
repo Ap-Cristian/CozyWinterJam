@@ -1,9 +1,10 @@
 extends Node3D
 @onready var camera = $"Camera3D"
 @onready var player = $"Player"
-
 @onready var safezone = get_parent().get_node("SafeZone")
 var initialCameraPos = Vector3()
+
+var exclusionList = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,11 +21,16 @@ func _process(delta: float) -> void:
 	var rayEnd = rayOrigin + camera.project_ray_normal(mousePos) * 2000
 	var rayCastQuery = PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd)
 	
-	var exclusionList = [safezone.get_rid()]
+	exclusionList = [safezone.get_rid()]
 	rayCastQuery.set_exclude(exclusionList)
 	var intersection = space_state.intersect_ray(rayCastQuery)
 	
 	if not intersection.is_empty():
+		while intersection.get('collider').name != "Ground":
+			exclusionList.append(intersection.get("rid"))
+			rayCastQuery.set_exclude(exclusionList)
+			intersection = space_state.intersect_ray(rayCastQuery)
+			
 		var pos = intersection.position
 		$Player.look_at(Vector3(pos.x, pos.y, pos.z), Vector3(0,1,0))
 	camera.set_position(
