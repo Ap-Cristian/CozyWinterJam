@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://brrhme3x06dbp"]
+[gd_scene load_steps=13 format=3 uid="uid://brrhme3x06dbp"]
 
 [ext_resource type="ArrayMesh" uid="uid://cnimyjw4ihuqd" path="res://assets/ground.obj" id="1_6boc0"]
 [ext_resource type="Script" path="res://scripts/debug_camera-input.gd" id="2_7ty1g"]
 [ext_resource type="Script" path="res://scripts/player-input.gd" id="3_gucpw"]
 [ext_resource type="Script" path="res://scripts/player_node.gd" id="3_v2enm"]
+[ext_resource type="Script" path="res://scripts/wood_manager.gd" id="5_jdd0r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_civ5m"]
 sky_top_color = Color(0.45517, 0.527521, 0.628218, 1)
@@ -104,3 +105,6 @@ shape = SubResource("ConvexPolygonShape3D_00vxr")
 transform = Transform3D(0.832235, -0.384089, 0.399825, 0, 0.721156, 0.692773, -0.554423, -0.57655, 0.600171, 2.95297, 9.2204, 3.84151)
 current = true
 fov = 90.8
+
+[node name="WoodManager" type="Node3D" parent="."]
+script = ExtResource("5_jdd0r")
