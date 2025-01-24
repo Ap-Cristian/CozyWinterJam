@@ -14,8 +14,8 @@ func _ready() -> void:
 	var ground_node = get_parent().get_node("Ground/Ground");
 	var ground_size = ground_node.get_aabb();
 	
-	var x_range = [ground_size.position.x / 6, ground_size.end.x / 6];
-	var z_range = [ground_size.position.z / 6, ground_size.end.z / 6];
+	var x_range = [ground_size.position.x, ground_size.end.x];
+	var z_range = [ground_size.position.z, ground_size.end.z];
 	
 	for i in range(0, 200):
 		var x = randf_range(x_range[0], x_range[1]);
