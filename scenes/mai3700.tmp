@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://brrhme3x06dbp"]
+[gd_scene load_steps=11 format=3 uid="uid://brrhme3x06dbp"]
 
 [ext_resource type="ArrayMesh" uid="uid://cnimyjw4ihuqd" path="res://assets/ground.obj" id="1_6boc0"]
 [ext_resource type="Script" path="res://scripts/debug_camera-input.gd" id="2_7ty1g"]
 [ext_resource type="Script" path="res://scripts/player-input.gd" id="3_gucpw"]
-[ext_resource type="Script" path="res://scenes/player_node.gd" id="3_v2enm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_civ5m"]
 sky_top_color = Color(0.45517, 0.527521, 0.628218, 1)
@@ -87,20 +86,17 @@ shape = SubResource("ConvexPolygonShape3D_00vxr")
 [node name="Camera3D" type="Camera3D" parent="Debug_Cam"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.09599, -0.27347)
 
-[node name="Player_Node" type="Node3D" parent="."]
-script = ExtResource("3_v2enm")
-
-[node name="Player" type="CharacterBody3D" parent="Player_Node"]
+[node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.55048, 5.82924)
 script = ExtResource("3_gucpw")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player_Node/Player"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
 mesh = SubResource("CapsuleMesh_pvqdp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player_Node/Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("ConvexPolygonShape3D_00vxr")
 
-[node name="Camera3D" type="Camera3D" parent="Player_Node"]
-transform = Transform3D(0.832235, -0.384089, 0.399825, 0, 0.721156, 0.692773, -0.554423, -0.57655, 0.600171, 2.95297, 9.2204, 3.84151)
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(0.832235, -0.384089, 0.399826, 0, 0.721156, 0.692773, -0.554423, -0.57655, 0.600171, 3.17233, 6.44349, 5.56683)
 current = true
 fov = 90.8
