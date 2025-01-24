@@ -16,23 +16,33 @@ func getMousePos() -> Vector2:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var space_state = get_world_3d().direct_space_state
-	var mousePos = getMousePos()
-	var rayOrigin = camera.project_ray_origin(mousePos)
-	var rayEnd = rayOrigin + camera.project_ray_normal(mousePos) * 2000
-	var rayCastQuery = PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd)
-	
-	exclusionList = [safezone.get_rid()]
-	rayCastQuery.set_exclude(exclusionList)
-	var intersection = space_state.intersect_ray(rayCastQuery)
-	
-	if not intersection.is_empty():
-		while intersection.get('collider').name != "Ground":
-			exclusionList.append(intersection.get("rid"))
-			rayCastQuery.set_exclude(exclusionList)
-			intersection = space_state.intersect_ray(rayCastQuery)
+	var mouse_pos = getMousePos();
+	var rayOrigin = camera.project_ray_origin(mouse_pos);
+	var rayEnd = rayOrigin + camera.project_ray_normal(mouse_pos) * 2000;
+
+	var exclude = [];
+	var query = PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd);
+	query.set_exclude(exclude);
+	var intersection = space_state.intersect_ray(query);
+
+	var intersection_pos = null;
+	while "collider" in intersection:
+		var collider_path = intersection.collider.get_path();
+		var full_node_path = collider_path.get_concatenated_names();
+
+		print(full_node_path);
+		if full_node_path.begins_with("root/Main/Ground"):
+			intersection_pos = intersection.position;
+			break ;
+
+		exclude.append(intersection.get("rid"))
+		query.set_exclude(exclude)
+		intersection = space_state.intersect_ray(query)
+
+	if intersection_pos == null:
+		return ;
 			
-		var pos = intersection.position
-		$Player.look_at(Vector3(pos.x, pos.y, pos.z), Vector3(0,1,0))
+	$Player.look_at(Vector3(intersection_pos.x, intersection_pos.y, intersection_pos.z), Vector3(0, 1, 0))
 	camera.set_position(
 		Vector3(initialCameraPos.x + player.position.x, initialCameraPos.y + player.position.y, initialCameraPos.z + player.position.z)
 	)

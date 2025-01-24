@@ -12,28 +12,44 @@ var wood_in_inventory = 0;
 
 signal wood_updated
 
+func mouse_colliding_with_wood(mouse_pos: Vector2):
+	var space_state = get_world_3d().direct_space_state
+	var rayOrigin = camera.project_ray_origin(mouse_pos);
+	var rayEnd = rayOrigin + camera.project_ray_normal(mouse_pos) * 2000;
+
+	var exclude = [];
+	var query = PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd);
+	query.set_exclude(exclude);
+	var intersection = space_state.intersect_ray(query);
+	
+	var hit_node = null;
+
+	while "collider" in intersection:
+		var collider_path = intersection.collider.get_path();
+		var full_node_path = collider_path.get_concatenated_names();
+		
+		# we hit what we are looking for
+		if full_node_path.begins_with("root/Main/WoodManager/"):
+			var node = get_node(collider_path.slice(0, 4));
+			var d1 = player.global_transform.origin
+			var d2 = node.get_child(0).global_transform.origin
+			var d = d1.distance_to(d2)
+			# print(full_node_path, d);
+			if d < PLAYER_WOOD_MIN_DIST:
+				hit_node = node;
+			break ;
+
+		exclude.append(intersection.get("rid"))
+		query.set_exclude(exclude)
+		intersection = space_state.intersect_ray(query)
+
+	return hit_node;
+
 func _input(event: InputEvent) -> void:
 
 	if event is InputEventMouseMotion:
-		var space_state = get_world_3d().direct_space_state
-		var mousePos = event.position;
-		var rayOrigin = camera.project_ray_origin(mousePos);
-		var rayEnd = rayOrigin + camera.project_ray_normal(mousePos) * 2000;
-		var intersection = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd));
-		
-		var hit_node = null;
-		if "collider" in intersection:
-			var collider_path = intersection.collider.get_path();
-			var collider_path_name = collider_path.get_concatenated_names();
-			if collider_path_name.begins_with("root/Main/WoodManager/"):
-				var node = get_node(collider_path.slice(0, 4));
-				var d1 = player.global_transform.origin
-				var d2 = node.global_transform.origin
-				var d = d1.distance_to(d2)
-				if d < PLAYER_WOOD_MIN_DIST:
-					hit_node = node;
 
-		focused_wood_node = hit_node;
+		focused_wood_node = mouse_colliding_with_wood(event.position);
 		
 		for child in self.get_children():
 			if focused_wood_node != null and child.get_path() == focused_wood_node.get_path():
