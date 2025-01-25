@@ -4,10 +4,18 @@ const SPEED = 20.0
 const JUMP_VELOCITY = 4.5
 const DEV = true
 
-@onready var camera = get_parent().get_child(1);
+@onready var camera = $"Camera3D";
 
 func _unhandled_input(event: InputEvent) -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if event is InputEventMouseButton:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
+	elif event.is_action_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE;
+	
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		if event is InputEventMouseMotion:
+			camera.rotate_x(-event.relative.y * 0.01);
+			self.rotate_y(-event.relative.x * 0.01);
 	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var camera = $"../Player_Node/Camera3D"
+@onready var camera = $"../Player_Node/Player/Camera3D"
 @onready var player = $"../Player_Node/Player";
 @onready var ui = $"../UI"
 

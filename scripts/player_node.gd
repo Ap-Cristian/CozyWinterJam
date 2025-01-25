@@ -1,5 +1,5 @@
 extends Node3D
-@onready var camera = $"Camera3D"
+@onready var camera = $"Player/Camera3D"
 @onready var player = $"Player"
 @onready var home_arrow = $"HomeArrow";
 @onready var safezone = get_parent().get_node("SafeZone")
@@ -33,7 +33,6 @@ func process_arrow_movement():
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
 	if not game_started:
 		var safezone_radius = safezone.get_child(1).shape.radius;
 		var dist = nodeHelper.get_distance_between_points([player.position.x, player.position.z], [safezone.position.x, safezone.position.z]);
@@ -66,10 +65,10 @@ func _process(delta: float) -> void:
 	if intersection_pos == null:
 		return ;
 			
-	$Player.look_at(Vector3(intersection_pos.x, intersection_pos.y, intersection_pos.z), Vector3(0, 1, 0))
-	camera.set_position(
-		Vector3(initialCameraPos.x + player.position.x, initialCameraPos.y + player.position.y, initialCameraPos.z + player.position.z)
-	)
-	camera.look_at(player.position)
+	#$Player.look_at(Vector3(intersection_pos.x, intersection_pos.y, intersection_pos.z), Vector3(0, 1, 0))
+	#camera.set_position(
+		#Vector3(initialCameraPos.x + player.position.x, initialCameraPos.y + player.position.y, initialCameraPos.z + player.position.z)
+	#)
+	#camera.look_at(player.position)
 	
 	process_arrow_movement();
