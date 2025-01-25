@@ -1,11 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://brrhme3x06dbp"]
+[gd_scene load_steps=31 format=3 uid="uid://brrhme3x06dbp"]
 
 [ext_resource type="Texture2D" uid="uid://b44ho5i86bqwy" path="res://assets/whitePuff00.png" id="1_52si7"]
 [ext_resource type="ArrayMesh" uid="uid://dr15nx64s25nn" path="res://assets/SnowLayer_subdivisions.obj" id="2_ym40u"]
 [ext_resource type="Shader" path="res://materials/snow_shader.gdshader" id="3_ac75s"]
 [ext_resource type="Script" path="res://scripts/player-input.gd" id="3_gucpw"]
 [ext_resource type="Script" path="res://scripts/player_node.gd" id="3_v2enm"]
-[ext_resource type="PackedScene" uid="uid://bhoql5q7dg5by" path="res://assets/direction_arrow.glb" id="4_0mf8h"]
+[ext_resource type="ArrayMesh" uid="uid://d2oevix42n0ds" path="res://assets/arrow.obj" id="4_0ywsu"]
 [ext_resource type="Script" path="res://scripts/fire.gd" id="4_cjcqn"]
 [ext_resource type="Script" path="res://scripts/wood_manager.gd" id="5_jdd0r"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="5_lyhul"]
@@ -52,6 +52,10 @@ shader = ExtResource("3_ac75s")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2dpup"]
 size = Vector3(300, 1, 300)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6iwvm"]
+emission_enabled = true
+emission = Color(0.611765, 0.266667, 0.00784314, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pvqdp"]
 
@@ -127,12 +131,19 @@ surface_material_override/0 = SubResource("ShaderMaterial_ofbhm")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_2dpup")
 
+[node name="Arrow" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.609, 0.5, 3.88436)
+mesh = ExtResource("4_0ywsu")
+
 [node name="Player_Node" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.168, 0)
 script = ExtResource("3_v2enm")
 
-[node name="HomeArrow" parent="Player_Node" instance=ExtResource("4_0mf8h")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 5.829)
+[node name="HomeArrow" type="MeshInstance3D" parent="Player_Node"]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 1, 0.8287, -5.02181, 2.79906)
+mesh = ExtResource("4_0ywsu")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_6iwvm")
 
 [node name="Player" type="CharacterBody3D" parent="Player_Node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.55048, 5.82924)
