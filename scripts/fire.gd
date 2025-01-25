@@ -2,6 +2,7 @@ extends StaticBody3D
 
 @onready var ui = $"../UI"
 @onready var player = $"../Player_Node/Player";
+@onready var player_node = $"../Player_Node";
 @onready var wood_manager = $"../WoodManager";
 
 const PLAYER_TO_FIRE_MIN_DISTNACE = 10;
@@ -32,6 +33,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not player_node.has_game_started():
+		return;
+		
 	fire_strength -= decrease_modifier * delta;
 	fire_strength_updated.emit(fire_strength);
 	
