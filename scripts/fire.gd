@@ -22,7 +22,7 @@ func _input(event: InputEvent):
 			fire_strength += min(wood_deposited * WARMNESS_PER_WOOD, 1 - fire_strength);
 			fire_strength_updated.emit(fire_strength);
 			can_deposit = false;
-			fire_interactable_updated.emit(false);
+			fire_interactable_updated.emit(false, 0);
 			decrease_modifier += COLD_MODIFIER_INCREASE_PER_DEPOSIT;
 
 # Called when the node enters the scene tree for the first time.
@@ -36,11 +36,10 @@ func _process(delta: float) -> void:
 	fire_strength_updated.emit(fire_strength);
 	
 	var d2 = self.global_transform.origin
-	if player.global_transform.origin.distance_to(d2) < PLAYER_TO_FIRE_MIN_DISTNACE :
+	if player.global_transform.origin.distance_to(d2) < PLAYER_TO_FIRE_MIN_DISTNACE:
 		if not can_deposit and wood_manager.get_wood_in_inventory() > 0:
-			fire_interactable_updated.emit(true);
+			fire_interactable_updated.emit(true, wood_manager.get_wood_in_inventory());
 			can_deposit = true;
 	elif can_deposit:
 		can_deposit = false;
-		fire_interactable_updated.emit(false);
-		
+		fire_interactable_updated.emit(false, 0);
