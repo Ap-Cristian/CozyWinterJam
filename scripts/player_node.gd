@@ -1,7 +1,6 @@
 extends Node3D
 @onready var camera = $"Player/Camera3D"
 @onready var player = $"Player"
-@onready var home_arrow = $"HomeArrow";
 @onready var safezone = get_parent().get_node("SafeZone")
 var nodeHelper = preload("res://scripts/helpers/node_helpers.gd").new();
 var initialCameraPos = Vector3()
@@ -20,16 +19,6 @@ func _ready() -> void:
 func getMousePos() -> Vector2:
 	return get_viewport().get_mouse_position()
 	
-func process_arrow_movement():
-	var safezone_radius = safezone.get_child(1).shape.radius;
-	var dist = nodeHelper.get_distance_between_points([player.position.x, player.position.z], [safezone.position.x, safezone.position.z]);
-	if dist > safezone_radius:
-		home_arrow.visible = true;
-		home_arrow.position = Vector3(player.position.x, player.position.y + 4, player.position.z);
-		var player_to_safezone_angle = atan2((player.position.z - safezone.position.z), (player.position.x - safezone.position.x) * -1);
-		home_arrow.rotation = Vector3(0, player_to_safezone_angle, 0);
-	else:
-		home_arrow.visible = false;
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -70,5 +59,3 @@ func _process(delta: float) -> void:
 		#Vector3(initialCameraPos.x + player.position.x, initialCameraPos.y + player.position.y, initialCameraPos.z + player.position.z)
 	#)
 	#camera.look_at(player.position)
-	
-	process_arrow_movement();
