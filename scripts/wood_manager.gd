@@ -77,25 +77,28 @@ func _input(event: InputEvent) -> void:
 					wood_in_inventory += 1;
 					wood_updated.emit(wood_in_inventory);
 					focused_wood_node.queue_free();
+					spawn_random_wood_pieces(5);
 
 
 func spawn_wood(x: float, z: float):
 	var obj = wood_scene.instantiate();
 	obj.position = Vector3(x, 0, z);
-	obj.rotation = Vector3(0, randf_range(0, 360), 0);
+	obj.rotation = Vector3(randf_range(0.3, 0.5), randf_range(0, 360), randf_range(0, 3));
 	self.add_child(obj);
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func spawn_random_wood_pieces(n: int):
 	var ground_node = get_parent().get_node("Ground/Ground");
 	var ground_size = ground_node.get_aabb();
-
-	wood_updated.connect(ui.update_wood_pieces);
 	
 	var x_range = [ground_size.position.x, ground_size.end.x];
 	var z_range = [ground_size.position.z, ground_size.end.z];
 	
-	for i in range(0, 200):
+	for i in range(0, n):
 		var x = randf_range(x_range[0], x_range[1]);
 		var z = randf_range(z_range[0], z_range[1]);
 		spawn_wood(x, z);
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	wood_updated.connect(ui.update_wood_pieces);
+	spawn_random_wood_pieces(200);
