@@ -137,22 +137,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_l6bhm")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_2dpup")
 
-[node name="Debug_Cam" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6023, 32.5641, 0)
-script = ExtResource("2_7ty1g")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Debug_Cam"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22041, 0)
-visible = false
-mesh = SubResource("CapsuleMesh_pvqdp")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Debug_Cam"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22041, 0)
-shape = SubResource("ConvexPolygonShape3D_00vxr")
-
-[node name="Camera3D" type="Camera3D" parent="Debug_Cam"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.09599, -0.27347)
-
 [node name="Player_Node" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.168, 0)
 script = ExtResource("3_v2enm")
