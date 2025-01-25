@@ -14,7 +14,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
-			camera.rotate_x(-event.relative.y * 0.01);
+			camera.rotation.x = clampf(camera.rotation.x - event.relative.y * 0.01, -1.5, 1.5);
 			self.rotate_y(-event.relative.x * 0.01);
 	
 func _physics_process(delta: float) -> void:
