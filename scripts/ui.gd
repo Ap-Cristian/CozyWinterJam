@@ -1,7 +1,8 @@
 extends CanvasLayer
 
 @onready var wood_pieces = $WoodPieces;
-@onready var fire_strength = $FireStrength;
+@onready var fire_strength = $Fire/FireStrength;
+@onready var torch_strength = $Torch/TorchStrength;
 @onready var fire_interactable = $FireInteractableNotice;
 @onready var crosshair = $Crosshair;
 @onready var death_text = $DeathText;
@@ -36,6 +37,9 @@ func update_wood_pieces(pieces: int):
 	
 func update_fire_strength(strength):
 	fire_strength.value = strength;
+
+func update_torch_strength(strength):
+	torch_strength.value = strength;
 	
 func show_death_screen():
 	wood_pieces.visible = false;

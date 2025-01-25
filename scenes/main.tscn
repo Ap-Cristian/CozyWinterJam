@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://brrhme3x06dbp"]
+[gd_scene load_steps=33 format=3 uid="uid://brrhme3x06dbp"]
 
 [ext_resource type="Texture2D" uid="uid://b44ho5i86bqwy" path="res://assets/whitePuff00.png" id="1_52si7"]
 [ext_resource type="ArrayMesh" uid="uid://dr15nx64s25nn" path="res://assets/SnowLayer_subdivisions.obj" id="2_ym40u"]
@@ -9,12 +9,14 @@
 [ext_resource type="Script" path="res://scripts/wood_manager.gd" id="5_jdd0r"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="5_lyhul"]
 [ext_resource type="Script" path="res://scripts/tree_manager.gd" id="6_gy3cr"]
+[ext_resource type="Script" path="res://scripts/torch.gd" id="7_p0wsx"]
 [ext_resource type="Texture2D" uid="uid://bb3uhma5asl6d" path="res://assets/healthbarUnder.png" id="8_k6igo"]
 [ext_resource type="Texture2D" uid="uid://kw66ppv7l26l" path="res://assets/healthbarProgress.png" id="9_6n4hx"]
 [ext_resource type="FontFile" uid="uid://drsvmmb2o7vr1" path="res://assets/WorkSans-VariableFont_wght.ttf" id="10_lyxr8"]
 [ext_resource type="Texture2D" uid="uid://t2ljcdv3u6d5" path="res://assets/fire_icon.png" id="10_ww4ab"]
-[ext_resource type="AudioStream" uid="uid://mvgxp66mtjvp" path="res://assets/breakcore_turbat.mp3" id="15_lxyjr"]
 [ext_resource type="PackedScene" uid="uid://k8kxm50gxth4" path="res://prefabs/Torch.tscn" id="14_fxxgw"]
+[ext_resource type="Texture2D" uid="uid://blk8p65cxfdla" path="res://assets/torchIcon.png" id="15_bt3vx"]
+[ext_resource type="AudioStream" uid="uid://mvgxp66mtjvp" path="res://assets/breakcore_turbat.mp3" id="15_lxyjr"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dncnp"]
 emission_shape = 3
@@ -147,6 +149,7 @@ current = true
 
 [node name="Torch" parent="Player_Node/Player/Camera3D" instance=ExtResource("14_fxxgw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.556253, -0.502272, -0.618438)
+script = ExtResource("7_p0wsx")
 
 [node name="SafeZone" type="StaticBody3D" parent="."]
 collision_layer = 2
@@ -204,16 +207,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="FireStrength" type="TextureProgressBar" parent="UI"]
-offset_left = 60.0
-offset_top = 10.0
-offset_right = 316.0
-offset_bottom = 50.0
-max_value = 1.0
-step = 0.001
-texture_under = ExtResource("8_k6igo")
-texture_progress = ExtResource("9_6n4hx")
-
 [node name="WoodPieces" type="Label" parent="UI"]
 anchors_preset = 3
 anchor_left = 1.0
@@ -245,14 +238,6 @@ grow_vertical = 0
 theme_override_fonts/font = ExtResource("10_lyxr8")
 theme_override_font_sizes/font_size = 28
 
-[node name="TextureRect" type="TextureRect" parent="UI"]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 730.0
-offset_bottom = 730.0
-scale = Vector2(0.06, 0.06)
-texture = ExtResource("10_ww4ab")
-
 [node name="DeathText" type="Label" parent="UI"]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
@@ -269,6 +254,46 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("10_lyxr8")
 theme_override_font_sizes/font_size = 40
 text = "I SHARTED"
+
+[node name="Fire" type="Node2D" parent="UI"]
+
+[node name="FireStrength" type="TextureProgressBar" parent="UI/Fire"]
+offset_left = 60.0
+offset_top = 10.0
+offset_right = 316.0
+offset_bottom = 50.0
+max_value = 1.0
+step = 0.001
+texture_under = ExtResource("8_k6igo")
+texture_progress = ExtResource("9_6n4hx")
+
+[node name="TextureRect" type="TextureRect" parent="UI/Fire"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 730.0
+offset_bottom = 730.0
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("10_ww4ab")
+
+[node name="Torch" type="Node2D" parent="UI"]
+
+[node name="TorchStrength" type="TextureProgressBar" parent="UI/Torch"]
+offset_left = 60.0
+offset_top = 63.0
+offset_right = 316.0
+offset_bottom = 103.0
+max_value = 1.0
+step = 0.001
+texture_under = ExtResource("8_k6igo")
+texture_progress = ExtResource("9_6n4hx")
+
+[node name="TorchIcon" type="TextureRect" parent="UI/Torch"]
+offset_left = 10.0
+offset_top = 63.0
+offset_right = 730.0
+offset_bottom = 783.0
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("15_bt3vx")
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_lxyjr")
