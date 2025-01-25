@@ -8,6 +8,11 @@ var initialCameraPos = Vector3()
 
 var exclusionList = []
 
+var game_started = false;
+
+func has_game_started():
+	return game_started;
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	initialCameraPos = camera.position
@@ -28,6 +33,13 @@ func process_arrow_movement():
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	if not game_started:
+		var safezone_radius = safezone.get_child(1).shape.radius;
+		var dist = nodeHelper.get_distance_between_points([player.position.x, player.position.z], [safezone.position.x, safezone.position.z]);
+		if dist > safezone_radius:
+			game_started = true;
+		
 	var space_state = get_world_3d().direct_space_state
 	var mouse_pos = getMousePos();
 	var rayOrigin = camera.project_ray_origin(mouse_pos);
