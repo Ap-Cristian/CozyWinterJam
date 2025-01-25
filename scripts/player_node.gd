@@ -1,6 +1,7 @@
 extends Node3D
 @onready var camera = $"Player/Camera3D"
 @onready var player = $"Player"
+@onready var ambient_sound = $"../AmbientSound";
 @onready var safezone = get_parent().get_node("SafeZone")
 var nodeHelper = preload("res://scripts/helpers/node_helpers.gd").new();
 var initialCameraPos = Vector3()
@@ -26,6 +27,7 @@ func _process(delta: float) -> void:
 		var safezone_radius = safezone.get_child(1).shape.radius;
 		var dist = nodeHelper.get_distance_between_points([player.position.x, player.position.z], [safezone.position.x, safezone.position.z]);
 		if dist > safezone_radius:
+			ambient_sound.play();
 			game_started = true;
 		
 	var space_state = get_world_3d().direct_space_state

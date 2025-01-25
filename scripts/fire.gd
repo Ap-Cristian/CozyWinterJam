@@ -4,6 +4,7 @@ extends StaticBody3D
 @onready var player = $"../Player_Node/Player";
 @onready var player_node = $"../Player_Node";
 @onready var wood_manager = $"../WoodManager";
+@onready var audio_player = $"../AmbientSound";
 
 const PLAYER_TO_FIRE_MIN_DISTNACE = 10;
 const WARMNESS_PER_WOOD = 0.2;
@@ -40,6 +41,7 @@ func _process(delta: float) -> void:
 	fire_strength -= decrease_modifier * delta;
 	fire_strength_updated.emit(fire_strength);
 	get_child(2).light_energy = 2 + 130 * fire_strength;
+	audio_player.volume_db = -10 - 25 * (1 - fire_strength);
 	
 	var d2 = self.global_transform.origin
 	if player.global_transform.origin.distance_to(d2) < PLAYER_TO_FIRE_MIN_DISTNACE:
