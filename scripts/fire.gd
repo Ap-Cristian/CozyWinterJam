@@ -11,11 +11,22 @@ const WARMNESS_PER_WOOD = 0.2;
 const COLD_MODIFIER_INCREASE_PER_DEPOSIT = 0.005;
 
 var fire_strength = 1.0;
-var decrease_modifier = 0.02;
+var decrease_modifier = 0.2;
+var dead = false;
 var can_deposit = false;
 
 signal fire_strength_updated
 signal fire_interactable_updated
+
+func die():
+	fire_strength_updated.emit(0);
+	get_child(2).light_energy = 0;
+	audio_player.stop();
+	ui.show_death_screen();
+	dead = true;
+	
+func are_we_dead_uwu():
+	return dead;
 
 func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_E:
@@ -39,9 +50,14 @@ func _process(delta: float) -> void:
 		return;
 		
 	fire_strength -= decrease_modifier * delta;
+	if fire_strength <= 0:
+		if not dead:
+			die();
+		return;
+	
 	fire_strength_updated.emit(fire_strength);
 	get_child(2).light_energy = 2 + 130 * fire_strength;
-	audio_player.volume_db = -10 - 25 * (1 - fire_strength);
+	audio_player.volume_db = -10 - 30 * (1 - fire_strength);
 	
 	var d2 = self.global_transform.origin
 	if player.global_transform.origin.distance_to(d2) < PLAYER_TO_FIRE_MIN_DISTNACE:
