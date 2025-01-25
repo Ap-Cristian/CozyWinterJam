@@ -7,7 +7,7 @@ resource_local_to_scene = true
 render_priority = 1
 shader = ExtResource("1_rgtu3")
 shader_parameter/border_width = 0.1
-shader_parameter/color = Color(0.950025, 0.140115, 0.625326, 1)
+shader_parameter/color = Color(0.737323, 0.928854, 0.131043, 1)
 shader_parameter/on = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjj2j"]
