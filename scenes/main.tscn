@@ -60,10 +60,8 @@ points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607,
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fsa2x"]
 transparency = 1
-blend_mode = 1
 cull_mode = 2
-no_depth_test = true
-albedo_color = Color(0.447059, 0, 0.0627451, 0.560784)
+albedo_color = Color(1, 1, 1, 0.564706)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_nxch8"]
 material = SubResource("StandardMaterial3D_fsa2x")
