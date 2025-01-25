@@ -2,7 +2,9 @@ extends CanvasLayer
 
 @onready var wood_pieces = $WoodPieces;
 @onready var fire_strength = $Fire/FireStrength;
+@onready var fire_icon = $Fire/TextureRect;
 @onready var torch_strength = $Torch/TorchStrength;
+@onready var torch_icon = $Torch/TorchIcon;
 @onready var fire_interactable = $FireInteractableNotice;
 @onready var crosshair = $Crosshair;
 @onready var death_text = $DeathText;
@@ -45,6 +47,9 @@ func show_death_screen():
 	wood_pieces.visible = false;
 	fire_strength.visible = false;
 	fire_interactable.visible = false;
+	fire_icon.visible = false;
+	torch_strength.visible = false;
+	torch_icon.visible = false;
 	crosshair.visible = false;
 	death_text.visible = true;
 	do_death_animations = true;
