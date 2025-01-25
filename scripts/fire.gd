@@ -30,6 +30,7 @@ func _input(event: InputEvent):
 func _ready() -> void:
 	fire_strength_updated.connect(ui.update_fire_strength);
 	fire_interactable_updated.connect(ui.update_fire_interactable);
+	get_child(2).light_energy = 2 + 130 * 1;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -38,6 +39,7 @@ func _process(delta: float) -> void:
 		
 	fire_strength -= decrease_modifier * delta;
 	fire_strength_updated.emit(fire_strength);
+	get_child(2).light_energy = 2 + 130 * fire_strength;
 	
 	var d2 = self.global_transform.origin
 	if player.global_transform.origin.distance_to(d2) < PLAYER_TO_FIRE_MIN_DISTNACE:
