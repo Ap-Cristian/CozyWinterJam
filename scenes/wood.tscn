@@ -27,6 +27,7 @@ size = Vector3(0.5, 0.2, 3)
 [node name="Wood" type="Node3D"]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+mass = 1000.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("BoxMesh_cojn5")
