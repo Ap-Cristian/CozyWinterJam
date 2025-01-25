@@ -5,7 +5,6 @@
 [ext_resource type="Shader" path="res://materials/snow_shader.gdshader" id="3_ac75s"]
 [ext_resource type="Script" path="res://scripts/player-input.gd" id="3_gucpw"]
 [ext_resource type="Script" path="res://scripts/player_node.gd" id="3_v2enm"]
-[ext_resource type="ArrayMesh" uid="uid://d2oevix42n0ds" path="res://assets/arrow.obj" id="4_0ywsu"]
 [ext_resource type="Script" path="res://scripts/fire.gd" id="4_cjcqn"]
 [ext_resource type="Script" path="res://scripts/wood_manager.gd" id="5_jdd0r"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="5_lyhul"]
@@ -15,6 +14,7 @@
 [ext_resource type="FontFile" uid="uid://drsvmmb2o7vr1" path="res://assets/WorkSans-VariableFont_wght.ttf" id="10_lyxr8"]
 [ext_resource type="Texture2D" uid="uid://t2ljcdv3u6d5" path="res://assets/fire_icon.png" id="10_ww4ab"]
 [ext_resource type="AudioStream" uid="uid://mvgxp66mtjvp" path="res://assets/breakcore_turbat.mp3" id="15_lxyjr"]
+[ext_resource type="PackedScene" uid="uid://k8kxm50gxth4" path="res://prefabs/Torch.tscn" id="14_fxxgw"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dncnp"]
 emission_shape = 3
@@ -127,10 +127,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_ofbhm")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_2dpup")
 
-[node name="Arrow" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.609, 0.5, 3.88436)
-mesh = ExtResource("4_0ywsu")
-
 [node name="Player_Node" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.168, 0)
 script = ExtResource("3_v2enm")
@@ -148,6 +144,9 @@ shape = SubResource("ConvexPolygonShape3D_00vxr")
 [node name="Camera3D" type="Camera3D" parent="Player_Node/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13802, -0.407837)
 current = true
+
+[node name="Torch" parent="Player_Node/Player/Camera3D" instance=ExtResource("14_fxxgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.556253, -0.502272, -0.618438)
 
 [node name="SafeZone" type="StaticBody3D" parent="."]
 collision_layer = 2
@@ -173,7 +172,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50049, 0)
 mesh = SubResource("BoxMesh_ki5hu")
 skeleton = NodePath("")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Fire"]
+[node name="FireLight" type="OmniLight3D" parent="Fire"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0547748, 3.29361, 0.0430803)
 light_color = Color(0.818176, 0.294089, 0, 1)
 light_energy = 13.794

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://k8kxm50gxth4"]
+
+[ext_resource type="ArrayMesh" uid="uid://cvu27r16xdc5f" path="res://assets/torch_handle.obj" id="1_3typh"]
+[ext_resource type="ArrayMesh" uid="uid://cplnx0pboyas1" path="res://assets/torch_tip.obj" id="2_8uvd6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ccw68"]
+albedo_color = Color(0.819608, 0.294118, 0, 1)
+emission_enabled = true
+emission = Color(0.87539, 0.316385, 0, 1)
+emission_energy_multiplier = 3.98
+
+[node name="Torch" type="Node3D"]
+
+[node name="TorchHandle" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_3typh")
+
+[node name="TorchTip" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.476138, 0)
+mesh = ExtResource("2_8uvd6")
+surface_material_override/0 = SubResource("StandardMaterial3D_ccw68")
+
+[node name="TorchLight" type="OmniLight3D" parent="TorchTip"]
+transform = Transform3D(1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 0, 0, 1, -0.00197983, 0.0490739, 0)
+light_color = Color(0.819608, 0.294118, 0, 1)
+light_energy = 5.314
+light_indirect_energy = 9.157
+omni_range = 10.5658
