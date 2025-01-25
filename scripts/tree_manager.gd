@@ -29,7 +29,7 @@ func spawnTrees():
 					
 					if nodeHelper.is_node_in_zone(tree, treeOrigin, treeRadius):
 						coords = nodeHelper.get_rand_coords_on_ground_outside_zone(ground, safeZoneOrigin, safeZoneShape.radius);
-						tree.set_position(Vector3(coords[0], tree.position.y, coords[1]));
+						tree.set_position(Vector3(coords[0], 0, coords[1]));
 						break
 						
 					if(trees.find(treeInstanced) == trees.size() - 1):

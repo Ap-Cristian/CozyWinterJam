@@ -1,5 +1,5 @@
 func spawn_prefab(x: float, z: float, prefab: Node, parent: Node) -> Node:
-	prefab.position = Vector3(x, 5, z);
+	prefab.position = Vector3(x, 0, z);
 	parent.add_child(prefab);
 	
 	return prefab;
