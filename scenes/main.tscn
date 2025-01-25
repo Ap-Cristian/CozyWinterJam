@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://brrhme3x06dbp"]
+[gd_scene load_steps=31 format=3 uid="uid://brrhme3x06dbp"]
 
 [ext_resource type="Texture2D" uid="uid://b44ho5i86bqwy" path="res://assets/whitePuff00.png" id="1_52si7"]
 [ext_resource type="ArrayMesh" uid="uid://dr15nx64s25nn" path="res://assets/SnowLayer_subdivisions.obj" id="2_ym40u"]
@@ -189,6 +189,20 @@ script = ExtResource("6_gy3cr")
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("5_lyhul")
+
+[node name="Crosshair" type="ColorRect" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -2.5
+offset_right = 1.5
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="FireStrength" type="TextureProgressBar" parent="UI"]
 offset_left = 60.0
