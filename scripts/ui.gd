@@ -5,7 +5,8 @@ extends CanvasLayer
 @onready var fire_interactable = $FireInteractableNotice;
 
 func _ready():
-	fire_strength.size = Vector2(300, 60);
+	update_wood_pieces(0);
+	update_fire_strength(1);
 
 func update_wood_pieces(pieces: int):
 	wood_pieces.text = str(pieces);
