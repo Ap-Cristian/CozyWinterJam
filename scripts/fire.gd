@@ -5,6 +5,7 @@ extends StaticBody3D
 @onready var player_node = $"../Player_Node";
 @onready var wood_manager = $"../WoodManager";
 @onready var audio_player = $"../AmbientSound";
+@onready var oul_sound = $"../AmbientSound/owl";
 @onready var fire_particles = $"FireParticles";
 @onready var smoke_particles = $"SmokeParticles";
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://brrhme3x06dbp"]
+[gd_scene load_steps=47 format=3 uid="uid://brrhme3x06dbp"]
 
 [ext_resource type="ArrayMesh" uid="uid://dr15nx64s25nn" path="res://assets/SnowLayer_subdivisions.obj" id="2_ym40u"]
 [ext_resource type="Shader" path="res://materials/snow_shader.gdshader" id="3_ac75s"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://k8kxm50gxth4" path="res://prefabs/Torch.tscn" id="14_fxxgw"]
 [ext_resource type="Texture2D" uid="uid://blk8p65cxfdla" path="res://assets/torchIcon.png" id="15_bt3vx"]
 [ext_resource type="AudioStream" uid="uid://cgvllkch31txd" path="res://assets/small-camp-fire.mp3" id="16_qfc1g"]
+[ext_resource type="AudioStream" uid="uid://bgj18hlyitch1" path="res://assets/owl.wav" id="20_he70n"]
 
 [sub_resource type="Curve" id="Curve_np4r8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.497872, 0.681319), 0.0, 0.0, 0, 0, Vector2(0.897872, 0), 0.0, 0.0, 0, 0]
@@ -779,6 +780,11 @@ volume_db = -10.0
 pitch_scale = 1.1
 mix_target = 1
 parameters/looping = true
+
+[node name="owl" type="AudioStreamPlayer3D" parent="AmbientSound"]
+stream = ExtResource("20_he70n")
+volume_db = 6.274
+autoplay = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_nmmvq")
