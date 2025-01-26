@@ -1,8 +1,10 @@
 extends CharacterBody3D
  
-const SPEED = 20.0
+const SPEED = 800.0
 const JUMP_VELOCITY = 4.5
 const DEV = true
+
+var can_bop_up_and_down = false;
 
 @onready var camera = $"Camera3D";
 @onready var fire = $"../../Fire";
@@ -20,7 +22,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
-	if not is_on_floor():
+	if is_on_floor():
+		can_bop_up_and_down = true;
+	else:
 		velocity += get_gravity() * delta
 		
 	if fire.are_we_dead_uwu():
@@ -36,11 +40,16 @@ func _physics_process(delta: float) -> void:
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * (delta * SPEED);
+		velocity.z = direction.z * (delta * SPEED);
+		if position.y < -4.6:
+			if can_bop_up_and_down:
+				velocity.y = 30 * delta;
+		else:
+			can_bop_up_and_down = false;
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, delta * (SPEED / 5))
+		velocity.z = move_toward(velocity.z, 0, delta * (SPEED / 5))
 
 	move_and_slide()
  
