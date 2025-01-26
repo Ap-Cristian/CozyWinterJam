@@ -3,17 +3,28 @@ extends Node3D
 @onready var torchLight = $"TorchTip/TorchLight"
 @onready var player = $"../../"
 @onready var safeZone = $"../../../../SafeZone/CollisionShape3D"
+@onready var fireParticles = $"FireParticles"
+@onready var smokeParticles = $"SmokeParticles"
+
 var nodeHelper = preload("res://scripts/helpers/node_helpers.gd").new();
 var torch_strength = 1.0;
 var decrease_modifier = 0.05;
+
+func kill_torch():
+	fireParticles.emitting = false;
+	smokeParticles.emitting = false;
 
 func update_torch(delta):
 	if (torch_strength - decrease_modifier * delta) >= 0:
 		torch_strength -= decrease_modifier * delta;
 		ui.update_torch_strength(torch_strength);
 		torchLight.light_energy = torch_strength;
+	else:
+		kill_torch();
 
 func replenish_strength():
+	fireParticles.emitting = true;
+	smokeParticles.emitting = true;
 	torch_strength = 1.0;
 
 # Called when the node enters the scene tree for the first time.

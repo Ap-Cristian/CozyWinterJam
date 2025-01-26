@@ -5,6 +5,10 @@ extends StaticBody3D
 @onready var player_node = $"../Player_Node";
 @onready var wood_manager = $"../WoodManager";
 @onready var audio_player = $"../AmbientSound";
+@onready var fire_particles = $"FireParticles";
+@onready var smoke_particles = $"SmokeParticles";
+
+
 var nodeHelper = preload("res://scripts/helpers/node_helpers.gd").new();
 
 const PLAYER_TO_FIRE_MIN_DISTNACE = 10;
@@ -21,6 +25,8 @@ signal fire_interactable_updated
 
 func die():
 	fire_strength_updated.emit(0);
+	fire_particles.emitting = false;
+	smoke_particles.emitting = false;
 	get_child(2).light_energy = 0;
 	audio_player.stop();
 	ui.show_death_screen();

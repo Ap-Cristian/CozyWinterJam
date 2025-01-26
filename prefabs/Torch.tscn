@@ -1,13 +1,66 @@
-[gd_scene load_steps=4 format=3 uid="uid://k8kxm50gxth4"]
+[gd_scene load_steps=10 format=3 uid="uid://k8kxm50gxth4"]
 
 [ext_resource type="ArrayMesh" uid="uid://cvu27r16xdc5f" path="res://assets/torch_handle.obj" id="1_3typh"]
 [ext_resource type="ArrayMesh" uid="uid://cplnx0pboyas1" path="res://assets/torch_tip.obj" id="2_8uvd6"]
+[ext_resource type="Material" uid="uid://dy05xae32q3ow" path="res://materials/fire.tres" id="3_ftlxo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ccw68"]
 albedo_color = Color(0.819608, 0.294118, 0, 1)
 emission_enabled = true
 emission = Color(0.87539, 0.316385, 0, 1)
 emission_energy_multiplier = 3.98
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qv0kv"]
+lifetime_randomness = 0.1
+particle_flag_damping_as_friction = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 178.022
+initial_velocity_max = 1.0
+gravity = Vector3(0, 6.365, 0)
+linear_accel_min = -4.41
+linear_accel_max = 1.69
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+scale_min = 0.1
+scale_max = 0.2
+scale_over_velocity_min = 274.19
+scale_over_velocity_max = 684.04
+hue_variation_min = -0.4
+hue_variation_max = -0.03
+turbulence_noise_strength = 4.62
+turbulence_noise_scale = 1.127
+turbulence_noise_speed_random = 4.0
+turbulence_influence_min = 0.139
+turbulence_influence_max = 0.139
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwd6b"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cl4q0"]
+material = SubResource("StandardMaterial3D_kwd6b")
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jr17y"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 72.692
+gravity = Vector3(0, 3.035, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 35.48
+scale_min = 0.0
+scale_max = 0.5
+scale_over_velocity_max = 134.41
+color = Color(0.785651, 0.223647, 0, 1)
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.31
+
+[sub_resource type="BoxMesh" id="BoxMesh_1plg4"]
+material = ExtResource("3_ftlxo")
+size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Torch" type="Node3D"]
 
@@ -25,3 +78,23 @@ light_color = Color(0.819608, 0.294118, 0, 1)
 light_energy = 5.314
 light_indirect_energy = 9.157
 omni_range = 10.5658
+
+[node name="SmokeParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.453448, 0)
+amount = 35
+amount_ratio = 0.3431
+lifetime = 0.43
+speed_scale = 0.68
+trail_lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_qv0kv")
+draw_pass_1 = SubResource("BoxMesh_cl4q0")
+
+[node name="FireParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00873542, 0.487916, -0.00621542)
+amount = 15
+lifetime = 0.08
+process_material = SubResource("ParticleProcessMaterial_jr17y")
+draw_pass_1 = SubResource("BoxMesh_1plg4")
+
+[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895955, 0)

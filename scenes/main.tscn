@@ -115,18 +115,18 @@ turbulence_influence_max = 0.139
 turbulence_initial_displacement_min = 1.49012e-06
 turbulence_initial_displacement_max = 2.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwd6b"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wn8m4"]
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dm5ch"]
-material = SubResource("StandardMaterial3D_kwd6b")
+material = SubResource("StandardMaterial3D_wn8m4")
 size = Vector3(0.25, 0.25, 0.25)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2o6gl"]
 emission_shape_scale = Vector3(0.8, 0.8, 0.8)
 emission_shape = 1
-emission_sphere_radius = 1.0
+emission_sphere_radius = 1.2
 spread = 72.692
 gravity = Vector3(0, 3.035, 0)
 linear_accel_min = -2.23517e-06
@@ -279,7 +279,7 @@ light_volumetric_fog_energy = 4.136
 light_specular = 3.055
 omni_range = 107.432
 
-[node name="Smoke" type="GPUParticles3D" parent="Fire"]
+[node name="SmokeParticles" type="GPUParticles3D" parent="Fire"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016272, 0.42063, 0.251292)
 amount = 185
 amount_ratio = 0.3431
@@ -287,10 +287,10 @@ trail_lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_xh0uu")
 draw_pass_1 = SubResource("BoxMesh_dm5ch")
 
-[node name="Fire" type="GPUParticles3D" parent="Fire"]
+[node name="FireParticles" type="GPUParticles3D" parent="Fire"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007092, -0.0119868, 0.292618)
 amount = 400
-lifetime = 0.25
+lifetime = 0.14
 process_material = SubResource("ParticleProcessMaterial_2o6gl")
 draw_pass_1 = SubResource("BoxMesh_wnkjw")
 
