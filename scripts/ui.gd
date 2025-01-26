@@ -35,6 +35,7 @@ func _process(delta: float) -> void:
 		camera.rotate_x(inc);
 
 func update_wood_pieces(pieces: int):
+	update_fire_interactable(false, pieces, true);
 	
 func update_fire_strength(strength):
 	fire_strength.value = strength;
@@ -54,7 +55,18 @@ func show_death_screen():
 	do_death_animations = true;
 	init_camera_rotation_x = camera.rotation.x;
 
-func update_fire_interactable(status: bool, wood_to_deposit: int):
+func update_fire_interactable(status: bool, wood_to_deposit: int, update_only_wood: bool = false):
+	if update_only_wood:
+		if fire_interactable.text != "":
+			var end: String;
+			if wood_to_deposit == 1:
+				end = " wood piece";
+			else:
+				end = " wood pieces";
+
+			fire_interactable.text = "Press E to burn " + str(wood_to_deposit) + end;
+		return;
+		
 	if status:
 		var end: String;
 		if wood_to_deposit == 1:
