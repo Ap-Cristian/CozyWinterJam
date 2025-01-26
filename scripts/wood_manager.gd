@@ -6,7 +6,7 @@ extends Node3D
 
 const PLAYER_WOOD_MIN_DIST = 5;
 
-var WOOD_APPROACH_RATE = 10;
+var WOOD_APPROACH_RATE = 15;
 
 var wood_scene = preload("res://scenes/wood.tscn");
 var focused_wood_node = null;
@@ -94,7 +94,7 @@ func _input(event: InputEvent) -> void:
 func spawn_wood(x: float, z: float):
 	var obj = wood_scene.instantiate();
 	obj.position = Vector3(x, 0, z);
-	obj.rotation = Vector3(randf_range(0.3, 0.5), randf_range(0, 360), randf_range(0, 3));
+	obj.rotation = Vector3(randf_range(0.3, 0.5), randf_range(0, 3), randf_range(0, 0.8));
 	self.add_child(obj);
 
 func spawn_random_wood_pieces(n: int):
@@ -120,7 +120,7 @@ func _physics_process(delta: float) -> void:
 		
 	var new_pos = Vector3(
 		move_toward(wood_in_animation.position.x, player.global_transform.origin.x, WOOD_APPROACH_RATE * delta),
-		move_toward(wood_in_animation.position.y, player.global_transform.origin.y + 2, WOOD_APPROACH_RATE * delta),	
+		move_toward(wood_in_animation.position.y, player.global_transform.origin.y, WOOD_APPROACH_RATE * delta),	
 		move_toward(wood_in_animation.position.z, player.global_transform.origin.z, WOOD_APPROACH_RATE * delta),	
 	);
 	
