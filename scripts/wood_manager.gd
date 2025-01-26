@@ -64,8 +64,7 @@ func mouse_colliding_with_wood(mouse_pos: Vector2):
 func _input(event: InputEvent) -> void:
 
 	if event is InputEventMouseMotion:
-
-		focused_wood_node = mouse_colliding_with_wood(event.position);
+		focused_wood_node = mouse_colliding_with_wood(ui.get_child(0).position);
 		
 		for child in self.get_children():
 			if focused_wood_node != null and child.get_path() == focused_wood_node.get_path():
