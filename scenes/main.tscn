@@ -1,6 +1,5 @@
 [gd_scene load_steps=33 format=3 uid="uid://brrhme3x06dbp"]
 
-[ext_resource type="Texture2D" uid="uid://b44ho5i86bqwy" path="res://assets/whitePuff00.png" id="1_52si7"]
 [ext_resource type="ArrayMesh" uid="uid://dr15nx64s25nn" path="res://assets/SnowLayer_subdivisions.obj" id="2_ym40u"]
 [ext_resource type="Shader" path="res://materials/snow_shader.gdshader" id="3_ac75s"]
 [ext_resource type="Script" path="res://scripts/player-input.gd" id="3_gucpw"]
@@ -14,29 +13,31 @@
 [ext_resource type="Texture2D" uid="uid://kw66ppv7l26l" path="res://assets/healthbarProgress.png" id="9_6n4hx"]
 [ext_resource type="FontFile" uid="uid://drsvmmb2o7vr1" path="res://assets/WorkSans-VariableFont_wght.ttf" id="10_lyxr8"]
 [ext_resource type="Texture2D" uid="uid://t2ljcdv3u6d5" path="res://assets/fire_icon.png" id="10_ww4ab"]
-[ext_resource type="PackedScene" uid="uid://k8kxm50gxth4" path="res://prefabs/Torch.tscn" id="14_fxxgw"]
+[ext_resource type="PackedScene" path="res://prefabs/Torch.tscn" id="14_fxxgw"]
 [ext_resource type="Texture2D" uid="uid://blk8p65cxfdla" path="res://assets/torchIcon.png" id="15_bt3vx"]
 [ext_resource type="AudioStream" uid="uid://mvgxp66mtjvp" path="res://assets/breakcore_turbat.mp3" id="15_lxyjr"]
+
+[sub_resource type="Curve" id="Curve_np4r8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.497872, 0.681319), 0.0, 0.0, 0, 0, Vector2(0.897872, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cdhfv"]
+curve = SubResource("Curve_np4r8")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dncnp"]
 emission_shape = 3
 emission_box_extents = Vector3(150, 0, 150)
-angle_min = -720.0
-angle_max = 720.0
-initial_velocity_max = 1.0
-angular_velocity_min = -720.0
-angular_velocity_max = 720.0
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+angular_velocity_min = -288.0
+angular_velocity_max = 348.0
 linear_accel_min = 0.999998
-linear_accel_max = 0.999998
-scale_min = 0.5
-scale_max = 0.7
+linear_accel_max = 10.0
+scale_min = 0.2
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_cdhfv")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54t42"]
-transparency = 1
-albedo_texture = ExtResource("1_52si7")
-
-[sub_resource type="QuadMesh" id="QuadMesh_ol56x"]
-material = SubResource("StandardMaterial3D_54t42")
+[sub_resource type="SphereMesh" id="SphereMesh_s4trp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctrxl"]
 albedo_color = Color(0.690604, 0.760586, 1, 1)
@@ -109,12 +110,13 @@ directional_shadow_max_distance = 250.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -36.3367, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 69.8167, 0)
-amount = 10000
-lifetime = 10.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 78.9281, 0)
+cast_shadow = 0
+amount = 1000
+lifetime = 5.0
 visibility_aabb = AABB(-300, -10, -300, 1000, 1000, 1000)
 process_material = SubResource("ParticleProcessMaterial_dncnp")
-draw_pass_1 = SubResource("QuadMesh_ol56x")
+draw_pass_1 = SubResource("SphereMesh_s4trp")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
