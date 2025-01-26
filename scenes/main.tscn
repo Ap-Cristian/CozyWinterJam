@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://brrhme3x06dbp"]
+[gd_scene load_steps=36 format=3 uid="uid://brrhme3x06dbp"]
 
 [ext_resource type="ArrayMesh" uid="uid://dr15nx64s25nn" path="res://assets/SnowLayer_subdivisions.obj" id="2_ym40u"]
 [ext_resource type="Shader" path="res://materials/snow_shader.gdshader" id="3_ac75s"]
@@ -90,11 +90,19 @@ albedo_color = Color(0.658309, 0.261932, 0.147412, 1)
 material = SubResource("StandardMaterial3D_isi1r")
 size = Vector3(2, 2, 2)
 
-[sub_resource type="Sky" id="Sky_uuupy"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r5c4i"]
+sky_top_color = Color(0.0331065, 0.0488296, 0.0711122, 1)
+sky_horizon_color = Color(0.132999, 0.13725, 0.14396, 1)
+sky_cover_modulate = Color(0.136826, 0.136826, 0.136826, 1)
+ground_bottom_color = Color(0.100316, 0.0812793, 0.0591645, 1)
+ground_horizon_color = Color(0.150701, 0.155339, 0.162659, 1)
+
+[sub_resource type="Sky" id="Sky_u4kdc"]
+sky_material = SubResource("ProceduralSkyMaterial_r5c4i")
 
 [sub_resource type="Environment" id="Environment_nmmvq"]
 background_mode = 2
-sky = SubResource("Sky_uuupy")
+sky = SubResource("Sky_u4kdc")
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.082051, 0.0933289, 0.11106, 1)
