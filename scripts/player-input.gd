@@ -10,6 +10,7 @@ const DEV = true
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
+		
 	elif event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE;
 	
@@ -17,6 +18,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion and not fire.are_we_dead_uwu():
 			camera.rotation.x = clampf(camera.rotation.x - event.relative.y * 0.01, -1.5, 1.5);
 			self.rotate_y(-event.relative.x * 0.01);
+	
+	if Input.is_key_pressed(KEY_SPACE) and fire.dead:
+		get_tree().reload_current_scene();
 	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
