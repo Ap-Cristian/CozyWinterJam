@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://brrhme3x06dbp"]
+[gd_scene load_steps=39 format=3 uid="uid://brrhme3x06dbp"]
 
 [ext_resource type="ArrayMesh" uid="uid://dr15nx64s25nn" path="res://assets/SnowLayer_subdivisions.obj" id="2_ym40u"]
 [ext_resource type="Shader" path="res://materials/snow_shader.gdshader" id="3_ac75s"]
@@ -10,10 +10,11 @@
 [ext_resource type="Script" path="res://scripts/tree_manager.gd" id="6_gy3cr"]
 [ext_resource type="Script" path="res://scripts/torch.gd" id="7_p0wsx"]
 [ext_resource type="Texture2D" uid="uid://bb3uhma5asl6d" path="res://assets/healthbarUnder.png" id="8_k6igo"]
+[ext_resource type="ArrayMesh" uid="uid://dn5rwsee6lmqr" path="res://assets/fireplace.obj" id="8_r633e"]
 [ext_resource type="Texture2D" uid="uid://kw66ppv7l26l" path="res://assets/healthbarProgress.png" id="9_6n4hx"]
 [ext_resource type="FontFile" uid="uid://drsvmmb2o7vr1" path="res://assets/WorkSans-VariableFont_wght.ttf" id="10_lyxr8"]
 [ext_resource type="Texture2D" uid="uid://t2ljcdv3u6d5" path="res://assets/fire_icon.png" id="10_ww4ab"]
-[ext_resource type="PackedScene" path="res://prefabs/Torch.tscn" id="14_fxxgw"]
+[ext_resource type="PackedScene" uid="uid://k8kxm50gxth4" path="res://prefabs/Torch.tscn" id="14_fxxgw"]
 [ext_resource type="Texture2D" uid="uid://blk8p65cxfdla" path="res://assets/torchIcon.png" id="15_bt3vx"]
 [ext_resource type="AudioStream" uid="uid://cgvllkch31txd" path="res://assets/small-camp-fire.mp3" id="16_qfc1g"]
 
@@ -87,14 +88,34 @@ height = 6.8
 radius = 11.0375
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_llp2x"]
-size = Vector3(2, 2, 2)
+size = Vector3(2.17875, 1.7384, 3.0639)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isi1r"]
-albedo_color = Color(0.658309, 0.261932, 0.147412, 1)
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xh0uu"]
+lifetime_randomness = 0.1
+particle_flag_damping_as_friction = true
+inherit_velocity_ratio = 0.764
+spread = 178.022
+initial_velocity_max = 1.0
+gravity = Vector3(0, 6.365, 0)
+linear_accel_min = -4.41
+linear_accel_max = 1.69
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+scale_min = 0.5
+scale_over_velocity_min = 274.19
+scale_over_velocity_max = 684.04
+hue_variation_min = -0.4
+hue_variation_max = -0.03
+turbulence_noise_strength = 4.62
+turbulence_noise_scale = 1.127
+turbulence_noise_speed_random = 4.0
+turbulence_influence_min = 0.139
+turbulence_influence_max = 0.139
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 2.0
 
-[sub_resource type="BoxMesh" id="BoxMesh_ki5hu"]
-material = SubResource("StandardMaterial3D_isi1r")
-size = Vector3(2, 2, 2)
+[sub_resource type="BoxMesh" id="BoxMesh_dm5ch"]
+size = Vector3(0.25, 0.25, 0.25)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r5c4i"]
 sky_top_color = Color(0.0331065, 0.0488296, 0.0711122, 1)
@@ -213,24 +234,33 @@ skeleton = NodePath("../..")
 shape = SubResource("CylinderShape3D_2f3cq")
 
 [node name="Fire" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925373, 0)
 script = ExtResource("4_cjcqn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Fire"]
 shape = SubResource("BoxShape3D_llp2x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Fire"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50049, 0)
-mesh = SubResource("BoxMesh_ki5hu")
+mesh = ExtResource("8_r633e")
 skeleton = NodePath("")
 
 [node name="FireLight" type="OmniLight3D" parent="Fire"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0547748, 3.29361, 0.0430803)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.820416, 0.298113)
 light_color = Color(0.818176, 0.294089, 0, 1)
 light_energy = 13.794
 light_indirect_energy = 6.95
 light_volumetric_fog_energy = 4.136
 light_specular = 3.055
 omni_range = 107.432
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Fire"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00670022, 0.530727, 0.304145)
+amount = 185
+amount_ratio = 0.3431
+trail_enabled = true
+trail_lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_xh0uu")
+draw_pass_1 = SubResource("BoxMesh_dm5ch")
 
 [node name="WoodManager" type="Node3D" parent="."]
 script = ExtResource("5_jdd0r")
