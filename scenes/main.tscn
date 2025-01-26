@@ -631,6 +631,7 @@ light_indirect_energy = 6.95
 light_volumetric_fog_energy = 4.136
 light_specular = 3.055
 omni_range = 107.432
+omni_attenuation = 2.051
 
 [node name="SmokeParticles" type="GPUParticles3D" parent="Fire"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016272, 0.42063, 0.251292)

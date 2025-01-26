@@ -12,11 +12,11 @@ extends StaticBody3D
 var nodeHelper = preload("res://scripts/helpers/node_helpers.gd").new();
 
 const PLAYER_TO_FIRE_MIN_DISTNACE = 10;
-const WARMNESS_PER_WOOD = 0.2;
-const COLD_MODIFIER_INCREASE_PER_DEPOSIT = 0.005;
+const WARMNESS_PER_WOOD = 0.3;
+const COLD_MODIFIER_INCREASE_PER_DEPOSIT = 0.003;
 
 var fire_strength = 1.0;
-var decrease_modifier = 0.025;
+var decrease_modifier = 0.015;
 var dead = false;
 var can_deposit = false;
 
