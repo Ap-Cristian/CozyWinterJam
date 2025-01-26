@@ -289,7 +289,7 @@ draw_pass_1 = SubResource("BoxMesh_dm5ch")
 
 [node name="Fire" type="GPUParticles3D" parent="Fire"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007092, -0.0119868, 0.292618)
-amount = 398
+amount = 400
 lifetime = 0.25
 process_material = SubResource("ParticleProcessMaterial_2o6gl")
 draw_pass_1 = SubResource("BoxMesh_wnkjw")
