@@ -253,7 +253,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("10_lyxr8")
 theme_override_font_sizes/font_size = 40
-text = "I SHARTED"
+text = "I SHARTED... RETRY?"
 
 [node name="Fire" type="Node2D" parent="UI"]
 
