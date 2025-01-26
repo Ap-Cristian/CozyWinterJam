@@ -84,8 +84,8 @@ func _process(delta: float) -> void:
 			animated_wood = null;
 		else:
 			animated_wood.position.y = move_toward(animated_wood.position.y, self.position.y - 7, WOOD_LOWERING_SPEED_INTO_FIRE * delta);
-			var scale = move_toward(animated_wood.scale.x, 0, WOOD_LOWERING_SPEED_INTO_FIRE * delta);
-			animated_wood.scale = Vector3(scale, scale, scale);
+			var scale = move_toward(animated_wood.get_child(0).get_child(0).scale.x, 0.01, 2 * delta);
+			animated_wood.get_child(0).get_child(0).scale = Vector3(scale, scale, scale);
 
 	fire_strength_updated.emit(fire_strength);
 	get_child(2).light_energy = 2 + 130 * fire_strength;
