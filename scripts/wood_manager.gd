@@ -6,10 +6,14 @@ extends Node3D
 
 const PLAYER_WOOD_MIN_DIST = 5;
 
+var WOOD_APPROACH_RATE = 10;
+
 var wood_scene = preload("res://scenes/wood.tscn");
 var focused_wood_node = null;
 var wood_in_inventory = 0;
 var wood_collected_during_game = 0;
+
+var wood_in_animation = null;
 
 signal wood_updated
 
@@ -81,7 +85,9 @@ func _input(event: InputEvent) -> void:
 					wood_in_inventory += 1;
 					wood_collected_during_game += 1;
 					wood_updated.emit(wood_in_inventory);
-					focused_wood_node.queue_free();
+					#focused_wood_node.queue_free();
+					wood_in_animation = focused_wood_node;
+					wood_in_animation.get_child(0).get_child(1).disabled = true;
 					spawn_random_wood_pieces(5);
 
 
@@ -107,3 +113,20 @@ func spawn_random_wood_pieces(n: int):
 func _ready() -> void:
 	wood_updated.connect(ui.update_wood_pieces);
 	spawn_random_wood_pieces(200);
+	
+func _physics_process(delta: float) -> void:
+	if wood_in_animation == null:
+		return;
+		
+	var new_pos = Vector3(
+		move_toward(wood_in_animation.position.x, player.global_transform.origin.x, WOOD_APPROACH_RATE * delta),
+		move_toward(wood_in_animation.position.y, player.global_transform.origin.y + 2, WOOD_APPROACH_RATE * delta),	
+		move_toward(wood_in_animation.position.z, player.global_transform.origin.z, WOOD_APPROACH_RATE * delta),	
+	);
+	
+	wood_in_animation.position = new_pos;
+	
+	var d = sqrt(pow(wood_in_animation.position.x - player.position.x, 2) + pow(wood_in_animation.position.z - player.position.z, 2));
+	if d < 2:
+		wood_in_animation.queue_free();
+		wood_in_animation = null;
