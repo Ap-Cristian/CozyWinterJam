@@ -1,7 +1,7 @@
 extends Node3D
 
 const TREE_DENSITY = 800;
-const MAX_NUMBER_OF_ATTEMPTS = 10;
+const MAX_NUMBER_OF_ATTEMPTS = 20;
 
 var tree_prefab = preload("res://prefabs/tree.tscn");
 var nodeHelper = preload("res://scripts/helpers/node_helpers.gd").new();
