@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-@onready var wood_pieces = $WoodPieces;
 @onready var fire_strength = $Fire/FireStrength;
 @onready var fire_icon = $Fire/TextureRect;
 @onready var torch_strength = $Torch/TorchStrength;
@@ -36,7 +35,6 @@ func _process(delta: float) -> void:
 		camera.rotate_x(inc);
 
 func update_wood_pieces(pieces: int):
-	wood_pieces.text = str(pieces);
 	
 func update_fire_strength(strength):
 	fire_strength.value = strength;
@@ -45,7 +43,6 @@ func update_torch_strength(strength):
 	torch_strength.value = strength;
 	
 func show_death_screen():
-	wood_pieces.visible = false;
 	fire_strength.visible = false;
 	fire_interactable.visible = false;
 	fire_icon.visible = false;
