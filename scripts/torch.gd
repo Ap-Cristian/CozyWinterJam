@@ -3,6 +3,7 @@ extends Node3D
 @onready var torchLight = $"TorchTip/TorchLight"
 @onready var player = $"../../"
 @onready var safeZone = $"../../../../SafeZone/CollisionShape3D"
+@onready var fire = $"../../../../Fire"
 @onready var fireParticles = $"FireParticles"
 @onready var smokeParticles = $"SmokeParticles"
 
@@ -21,6 +22,10 @@ func update_torch(delta):
 		torchLight.light_energy = torch_strength;
 	else:
 		kill_torch();
+	
+	if(fire.dead):
+		kill_torch();
+		self.visible = false;
 
 func replenish_strength():
 	fireParticles.emitting = true;
