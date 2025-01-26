@@ -115,9 +115,7 @@ turbulence_initial_displacement_min = 1.49012e-06
 turbulence_initial_displacement_max = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwd6b"]
-transparency = 1
-blend_mode = 1
-albedo_color = Color(0.28485, 0.28485, 0.28485, 1)
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dm5ch"]
 material = SubResource("StandardMaterial3D_kwd6b")
@@ -261,7 +259,7 @@ light_specular = 3.055
 omni_range = 107.432
 
 [node name="Smoke" type="GPUParticles3D" parent="Fire"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00207263, 0.54431, 0.3162)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016272, 0.42063, 0.251292)
 amount = 185
 amount_ratio = 0.3431
 trail_lifetime = 10.0
@@ -324,6 +322,7 @@ theme_override_font_sizes/font_size = 40
 text = "I DIED... RETRY?"
 
 [node name="DeathHint" type="Label" parent="UI"]
+visible = false
 anchors_preset = -1
 anchor_left = 0.506
 anchor_top = 0.944
