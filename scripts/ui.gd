@@ -64,7 +64,7 @@ func show_death_screen():
 	else:
 		tmp = " pieces of wood";
 		
-	death_stats.text = "You survived for " +  str(player.get_alive_time()) + " seconds and burned " + str(wood_manager.get_wood_collected_during_game()) + tmp;
+	death_stats.text = "I survived for " +  str(player.get_alive_time()) + " seconds and burned " + str(wood_manager.get_wood_collected_during_game()) + tmp;
 	init_camera_rotation_x = camera.rotation.x;
 
 func update_fire_interactable(status: bool, wood_to_deposit: int, update_only_wood: bool = false):
