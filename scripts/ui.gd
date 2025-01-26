@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var fire_interactable = $FireInteractableNotice;
 @onready var crosshair = $Crosshair;
 @onready var death_text = $DeathText;
+@onready var death_hint = $DeathHint;
 @onready var camera = $"../Player_Node/Player/Camera3D";
 
 var do_death_animations = false;
@@ -52,6 +53,7 @@ func show_death_screen():
 	torch_icon.visible = false;
 	crosshair.visible = false;
 	death_text.visible = true;
+	death_hint.visible = true;
 	do_death_animations = true;
 	init_camera_rotation_x = camera.rotation.x;
 
