@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://t2ljcdv3u6d5" path="res://assets/fire_icon.png" id="10_ww4ab"]
 [ext_resource type="PackedScene" uid="uid://k8kxm50gxth4" path="res://prefabs/Torch.tscn" id="14_fxxgw"]
 [ext_resource type="Texture2D" uid="uid://blk8p65cxfdla" path="res://assets/torchIcon.png" id="15_bt3vx"]
-[ext_resource type="AudioStream" uid="uid://mvgxp66mtjvp" path="res://assets/breakcore_turbat.mp3" id="15_lxyjr"]
+[ext_resource type="AudioStream" uid="uid://cgvllkch31txd" path="res://assets/small-camp-fire.mp3" id="16_qfc1g"]
 
 [sub_resource type="Curve" id="Curve_np4r8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.497872, 0.681319), 0.0, 0.0, 0, 0, Vector2(0.897872, 0), 0.0, 0.0, 0, 0]
@@ -140,6 +140,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.55048, 5.82924)
 script = ExtResource("3_gucpw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player_Node/Player"]
+visible = false
 mesh = SubResource("CapsuleMesh_pvqdp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player_Node/Player"]
@@ -298,7 +299,7 @@ scale = Vector2(0.06, 0.06)
 texture = ExtResource("15_bt3vx")
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("15_lxyjr")
+stream = ExtResource("16_qfc1g")
 volume_db = -10.0
 pitch_scale = 1.1
 mix_target = 1

@@ -16,6 +16,7 @@ func has_game_started():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	initialCameraPos = camera.position
+	ambient_sound.play();
 
 func getMousePos() -> Vector2:
 	return get_viewport().get_mouse_position()
@@ -27,7 +28,6 @@ func _process(delta: float) -> void:
 		var safezone_radius = safezone.get_child(1).shape.radius;
 		var dist = nodeHelper.get_distance_between_points([player.position.x, player.position.z], [safezone.position.x, safezone.position.z]);
 		if dist > safezone_radius:
-			ambient_sound.play();
 			game_started = true;
 		
 	var space_state = get_world_3d().direct_space_state

@@ -5,6 +5,7 @@ extends StaticBody3D
 @onready var player_node = $"../Player_Node";
 @onready var wood_manager = $"../WoodManager";
 @onready var audio_player = $"../AmbientSound";
+var nodeHelper = preload("res://scripts/helpers/node_helpers.gd").new();
 
 const PLAYER_TO_FIRE_MIN_DISTNACE = 10;
 const WARMNESS_PER_WOOD = 0.2;
@@ -43,6 +44,12 @@ func _ready() -> void:
 	fire_strength_updated.connect(ui.update_fire_strength);
 	fire_interactable_updated.connect(ui.update_fire_interactable);
 	get_child(2).light_energy = 2 + 130 * 1;
+	
+func distance_between_player_and_fire() -> float:
+	var fireOrigin = [$"CollisionShape3D".position.x, $"CollisionShape3D".position.z];
+	var playerOrigin = [player.position.x, player.position.z];
+	
+	return nodeHelper.get_distance_between_points(fireOrigin, playerOrigin);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -57,7 +64,7 @@ func _process(delta: float) -> void:
 	
 	fire_strength_updated.emit(fire_strength);
 	get_child(2).light_energy = 2 + 130 * fire_strength;
-	audio_player.volume_db = -10 - 30 * (1 - fire_strength);
+	audio_player.volume_db = -10 - 30 * (1 - fire_strength) - distance_between_player_and_fire();
 	
 	var d2 = self.global_transform.origin
 	if player.global_transform.origin.distance_to(d2) < PLAYER_TO_FIRE_MIN_DISTNACE:
