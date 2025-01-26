@@ -9,9 +9,13 @@ var initialCameraPos = Vector3()
 var exclusionList = []
 
 var game_started = false;
+var player_alive_since = 0;
 
 func has_game_started():
 	return game_started;
+	
+func get_alive_time():
+	return int(Time.get_ticks_msec() / 1000 - player_alive_since);
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,6 +32,7 @@ func _process(delta: float) -> void:
 		var safezone_radius = safezone.get_child(1).shape.radius;
 		var dist = nodeHelper.get_distance_between_points([player.position.x, player.position.z], [safezone.position.x, safezone.position.z]);
 		if dist > safezone_radius:
+			player_alive_since = Time.get_ticks_msec() / 1000;
 			game_started = true;
 		
 	var space_state = get_world_3d().direct_space_state

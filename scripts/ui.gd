@@ -8,7 +8,10 @@ extends CanvasLayer
 @onready var crosshair = $Crosshair;
 @onready var death_text = $DeathText;
 @onready var death_hint = $DeathHint;
+@onready var death_stats = $DeathStats;
 @onready var camera = $"../Player_Node/Player/Camera3D";
+@onready var wood_manager = $"../WoodManager";
+@onready var player = $"../Player_Node";
 
 var do_death_animations = false;
 
@@ -26,6 +29,7 @@ func _process(delta: float) -> void:
 	if last_death_text_modulate.a < 0.5:
 		last_death_text_modulate.a += 0.1 * delta;
 		death_text.modulate = last_death_text_modulate;
+		death_stats.modulate = last_death_text_modulate;
 	
 	if camera.rotation.x < 1.5:
 		var idk = 1;
@@ -53,6 +57,14 @@ func show_death_screen():
 	death_text.visible = true;
 	death_hint.visible = true;
 	do_death_animations = true;
+	
+	var tmp = "";
+	if wood_manager.get_wood_collected_during_game() == 1:
+		tmp = " piece of wood";
+	else:
+		tmp = " pieces of wood";
+		
+	death_stats.text = "You survived for " +  str(player.get_alive_time()) + " seconds and burned " + str(wood_manager.get_wood_collected_during_game()) + tmp;
 	init_camera_rotation_x = camera.rotation.x;
 
 func update_fire_interactable(status: bool, wood_to_deposit: int, update_only_wood: bool = false):

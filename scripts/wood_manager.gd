@@ -9,11 +9,15 @@ const PLAYER_WOOD_MIN_DIST = 5;
 var wood_scene = preload("res://scenes/wood.tscn");
 var focused_wood_node = null;
 var wood_in_inventory = 0;
+var wood_collected_during_game = 0;
 
 signal wood_updated
 
 func get_wood_in_inventory():
 	return wood_in_inventory;
+	
+func get_wood_collected_during_game():
+	return wood_collected_during_game;
 
 func wood_deposit_all():
 	var ret = wood_in_inventory;
@@ -75,6 +79,7 @@ func _input(event: InputEvent) -> void:
 				var d = d1.distance_to(d2)
 				if d < PLAYER_WOOD_MIN_DIST:
 					wood_in_inventory += 1;
+					wood_collected_during_game += 1;
 					wood_updated.emit(wood_in_inventory);
 					focused_wood_node.queue_free();
 					spawn_random_wood_pieces(5);
