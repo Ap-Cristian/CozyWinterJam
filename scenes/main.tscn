@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://brrhme3x06dbp"]
+[gd_scene load_steps=43 format=3 uid="uid://brrhme3x06dbp"]
 
 [ext_resource type="ArrayMesh" uid="uid://dr15nx64s25nn" path="res://assets/SnowLayer_subdivisions.obj" id="2_ym40u"]
 [ext_resource type="Shader" path="res://materials/snow_shader.gdshader" id="3_ac75s"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bb3uhma5asl6d" path="res://assets/healthbarUnder.png" id="8_k6igo"]
 [ext_resource type="ArrayMesh" uid="uid://dn5rwsee6lmqr" path="res://assets/fireplace.obj" id="8_r633e"]
 [ext_resource type="Texture2D" uid="uid://kw66ppv7l26l" path="res://assets/healthbarProgress.png" id="9_6n4hx"]
+[ext_resource type="Material" uid="uid://dy05xae32q3ow" path="res://materials/fire.tres" id="9_iosfq"]
 [ext_resource type="FontFile" uid="uid://drsvmmb2o7vr1" path="res://assets/WorkSans-VariableFont_wght.ttf" id="10_lyxr8"]
 [ext_resource type="Texture2D" uid="uid://t2ljcdv3u6d5" path="res://assets/fire_icon.png" id="10_ww4ab"]
 [ext_resource type="PackedScene" uid="uid://k8kxm50gxth4" path="res://prefabs/Torch.tscn" id="14_fxxgw"]
@@ -115,11 +116,31 @@ turbulence_initial_displacement_min = 1.49012e-06
 turbulence_initial_displacement_max = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwd6b"]
+shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dm5ch"]
 material = SubResource("StandardMaterial3D_kwd6b")
 size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2o6gl"]
+emission_shape_scale = Vector3(0.8, 0.8, 0.8)
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 72.692
+gravity = Vector3(0, 3.035, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 35.48
+scale_min = 0.0
+scale_max = 2.0
+scale_over_velocity_max = 134.41
+color = Color(0.785651, 0.223647, 0, 1)
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.31
+
+[sub_resource type="BoxMesh" id="BoxMesh_wnkjw"]
+material = ExtResource("9_iosfq")
+size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r5c4i"]
 sky_top_color = Color(0.0331065, 0.0488296, 0.0711122, 1)
@@ -265,6 +286,13 @@ amount_ratio = 0.3431
 trail_lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_xh0uu")
 draw_pass_1 = SubResource("BoxMesh_dm5ch")
+
+[node name="Fire" type="GPUParticles3D" parent="Fire"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007092, -0.0119868, 0.292618)
+amount = 398
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_2o6gl")
+draw_pass_1 = SubResource("BoxMesh_wnkjw")
 
 [node name="WoodManager" type="Node3D" parent="."]
 script = ExtResource("5_jdd0r")
