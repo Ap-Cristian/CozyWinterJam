@@ -1,7 +1,7 @@
 extends Node3D
 
-const TREE_DENSITY = 800;
-const MAX_NUMBER_OF_ATTEMPTS = 20;
+const TREE_DENSITY = 1000;
+const MAX_NUMBER_OF_ATTEMPTS = 2;
 
 var tree_prefab = preload("res://prefabs/tree.tscn");
 var nodeHelper = preload("res://scripts/helpers/node_helpers.gd").new();
@@ -20,11 +20,11 @@ func spawnTrees():
 		var coords = nodeHelper.get_rand_coords_on_ground_outside_zone(ground, safeZoneOrigin, safeZoneShape.radius)
 		var tree = nodeHelper.spawn_prefab(coords[0], coords[1], tree_prefab.instantiate(), managerNode)
 		
-		var scale = rng.randf_range(0.6, 1.2);
+		var scaleRand = rng.randf_range(0.6, 1.2);
 		var degrees = rng.randf_range(0,360);
-		tree.scale.x = scale;
-		tree.scale.y = scale;
-		tree.scale.z = scale;
+		tree.scale.x = scaleRand;
+		tree.scale.y = scaleRand;
+		tree.scale.z = scaleRand;
 		tree.rotation.y = degrees;
 		
 		var okToAdd = false;
@@ -48,7 +48,7 @@ func spawnTrees():
 			if(okToAdd):
 				trees.append(tree);
 			else:
-				print("Tree ran out of space...");
+				#print("Tree ran out of space...");
 				tree.queue_free()
 		else:
 			trees.append(tree);
@@ -60,5 +60,5 @@ func _ready() -> void:
 	print("number_of_trees_actual:", trees.size());
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+#func _process(delta: float) -> void:
+	#pass

@@ -15,7 +15,7 @@ func has_game_started():
 	return game_started;
 	
 func get_alive_time():
-	return int(Time.get_ticks_msec() / 1000 - player_alive_since);
+	return int(Time.get_ticks_msec() / 1000.0 - player_alive_since);
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,12 +27,12 @@ func getMousePos() -> Vector2:
 	
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not game_started:
 		var safezone_radius = safezone.get_child(1).shape.radius;
 		var dist = nodeHelper.get_distance_between_points([player.position.x, player.position.z], [safezone.position.x, safezone.position.z]);
 		if dist > safezone_radius:
-			player_alive_since = Time.get_ticks_msec() / 1000;
+			player_alive_since = Time.get_ticks_msec() / 1000.0;
 			game_started = true;
 		
 	var space_state = get_world_3d().direct_space_state
